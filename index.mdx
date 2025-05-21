@@ -1,71 +1,118 @@
 ---
-title: Introduction
-description: "Welcome to the home of your new documentation"
+title: "RestifyX.js"
+description: "A powerful, flexible Node.js framework for building RESTful APIs with minimal boilerplate"
 ---
 
 <img
   className="block dark:hidden"
   src="/images/hero-light.png"
-  alt="Hero Light"
+  alt="RestifyX.js Hero Light"
 />
 <img
   className="hidden dark:block"
   src="/images/hero-dark.png"
-  alt="Hero Dark"
+  alt="RestifyX.js Hero Dark"
 />
 
-## Setting up
+## What is RestifyX.js?
 
-The first step to world-class documentation is setting up your editing environments.
-
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
-
-## Make it yours
-
-Update your docs to your brand and add valuable content for the best user conversion.
+RestifyX.js is a modern, feature-rich framework for building RESTful APIs in Node.js. It combines the flexibility of Express with powerful abstractions that make API development faster and more enjoyable.
 
 <CardGroup cols={2}>
   <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
+    title="Quick Start"
+    icon="rocket"
+    href="/getting-started/quick-start"
   >
-    Customize your docs to your company's colors and brands
+    Get up and running with RestifyX.js in minutes
   </Card>
   <Card
-    title="Reference APIs"
+    title="API Reference"
     icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
+    href="/api-reference"
   >
-    Automatically generate endpoints from an OpenAPI spec
+    Explore the complete API documentation
   </Card>
   <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/content/components/accordions"
+    title="Examples"
+    icon="book-open"
+    href="/examples/basic-crud"
   >
-    Build interactive features and designs to guide your users
+    Learn from practical examples and use cases
   </Card>
   <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
+    title="Configuration"
+    icon="gear"
+    href="/getting-started/configuration"
   >
-    Check out our showcase of our favorite documentation
+    Customize RestifyX.js to fit your needs
   </Card>
 </CardGroup>
+
+## Key Features
+
+RestifyX.js comes packed with features to accelerate your API development:
+
+- **Fluent API Design** - Intuitive, chainable methods for defining endpoints
+- **Decorator Support** - Use TypeScript decorators for clean, declarative code
+- **Built-in Validation** - Validate requests with minimal setup
+- **Automatic Swagger Docs** - API documentation generated automatically
+- **Hot Reloading** - Instant updates during development
+- **Performance Monitoring** - Built-in tools to track API performance
+- **Security Features** - Robust security with sensible defaults
+- **WebSocket Support** - Real-time communication made easy
+- **Middleware System** - Flexible middleware architecture
+- **Error Handling** - Comprehensive error management
+
+## Why RestifyX.js?
+
+RestifyX.js was built to solve common pain points in API development:
+
+- **Reduce Boilerplate** - Focus on business logic, not repetitive code
+- **Type Safety** - First-class TypeScript support
+- **Developer Experience** - Intuitive APIs and helpful error messages
+- **Performance** - Optimized for high-throughput applications
+- **Flexibility** - Adapt to your project's needs without constraints
+- **Production Ready** - Built with real-world applications in mind
+
+## Quick Example
+
+\`\`\`typescript
+import { create, CreateEndpoint, SendData } from 'restifyx.js';
+
+// Create the application
+const app = create({
+  port: 3000,
+  debug: true
+});
+
+// Define an endpoint using the fluent API
+const helloEndpoint = CreateEndpoint()
+  .setName('Hello World')
+  .setPath('/hello/:name')
+  .setMethod('GET')
+  .setDescription('Says hello to the provided name')
+  .addParams({ name: 'string' })
+  .setHandler(async (header, body, query, cookie, params) => {
+    SendData.json({
+      message: `Hello, ${params.name}!`,
+      timestamp: new Date()
+    });
+  });
+
+// Register the endpoint manually
+app.registerEndpoint(helloEndpoint.build());
+
+// Start the server
+async function start() {
+  await app.setup();
+  await app.start();
+  console.log('Server running on http://localhost:3000');
+}
+
+start().catch(console.error);
+```
+
+Ready to get started? Check out our [Quick Start Guide](/getting-started/quick-start) or dive into the [API Reference](/api-reference).
+```
+
